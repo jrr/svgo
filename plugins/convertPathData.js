@@ -9,6 +9,7 @@ exports.description = 'optimizes path data: writes in shorter form, applies tran
 exports.params = {
     applyTransforms: true,
     applyTransformsStroked: true,
+    convertToRelative: true,
     makeArcs: {
         threshold: 2.5, // coefficient of rounding error
         tolerance: 0.5  // percentage of radius
@@ -70,7 +71,9 @@ exports.fn = function(item, params) {
 
         // TODO: get rid of functions returns
         if (data.length) {
-            convertToRelative(data);
+            if (params.convertToRelative) {
+              convertToRelative(data);
+            }
 
             if (params.applyTransforms) {
                 data = applyTransforms(item, data, params);
